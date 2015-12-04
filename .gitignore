@@ -1,0 +1,4 @@
+.DS_STORE
+.bundle
+
+vendor/bundle
