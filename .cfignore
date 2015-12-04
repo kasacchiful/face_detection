@@ -1,0 +1,6 @@
+.DS_STORE
+
+.git
+.bundle
+
+vendor/bundle
