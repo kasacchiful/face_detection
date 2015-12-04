@@ -17,8 +17,29 @@ $(document).ready(function() {
         canvas = $('#canvas').get(0);
         ctx = canvas.getContext('2d');
         ctx.drawImage(img, 0, 0);
+        analyze(image_url);
       };
     };
     file_reader.readAsDataURL(file);
   });
 });
+
+function analyze(image_data) {
+  var api_endpoint = "/api/v1/face";
+
+  $('#loading').css('visibility', 'visible');
+  return $.ajax({
+    type: 'POST',
+    url: api_endpoint,
+    contentType: 'application/json',
+    dataType: 'json',
+    data: JSON.stringify({uri: image_data}),
+    context: this
+  }).success(function(data, status, xhr) {
+    console.log(data);
+    return $('#loading').css('visibility', 'hidden');
+  }).error(function(data, status, xhr) {
+    alert(status);
+    return $('#loading').css('visibility', 'hidden');
+  });
+}
